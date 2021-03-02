@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('notas', function(){
-    $notas = DB::table('notas_tables')->get();
+    $notas = Notas::all();
 
     return view('notas', ['notas' => $notas]);
 })->name('notas.index');
@@ -29,9 +29,8 @@ Route::get('agregar', function(){
 });
 
 Route::get('notas/{id}/editar', function ($id){
-    $notas = DB::table('notas_tables')
-    ->where('id', $id)
-    ->first();
+    $notas = Note::find($id); //DB::table('notas')->where('id', $id)->first();
+    
     return view('editar', ['notas' => $notas]);
-    return 'Aqui se van a editar las notas' .$id;
+    //return 'Aqui se van a editar las notas' .$id;
 })->name('notas.edit');
